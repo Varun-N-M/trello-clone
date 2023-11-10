@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.basic-button {
+  @apply flex items-center gap-2 text-sm px-3 py-2 hover:bg-white/[15%] rounded-[4px];
+}
+.background-gradient {
+  background: rgb(8, 68, 151);
+  background: linear-gradient(
+    90deg,
+    rgba(8, 68, 151, 1) 0%,
+    rgba(6, 36, 77, 1) 100%
+  );
+}
+::-webkit-scrollbar{
+  height: 12px;
+}
+::-webkit-scrollbar-track{
+  @apply bg-black/25 rounded-full mr-[10px] ml-[25px]
+}
+
+::-webkit-scrollbar-thumb{
+  @apply bg-white/50 rounded-full
+}
