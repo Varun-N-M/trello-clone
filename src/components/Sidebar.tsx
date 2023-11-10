@@ -20,7 +20,7 @@ export const Sidebar = () => {
     <>
       {sidebar ? (
         <>
-          <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-fit absolute z-20 xl:relative h-screen">
+          <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-fit absolute z-20 h-screen">
             <div className="flex flex-row flex-1 flex-wrap  border-b border-gray-700 w-full gap-3 items-center px-2 py-1.5">
               <button>
                 <Image
