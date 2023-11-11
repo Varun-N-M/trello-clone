@@ -40,11 +40,11 @@ export const Dropdown = ({ options,title }: DropDownProps) => {
           vertical: "bottom",
           horizontal: "left",
         }}
-        className="mt-2"
+        className="mt-5"
       >
         <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-[250px] border border-gray-800">
-          {options?.map((option) => (
-            <button className="basic-button w-full justify-between">
+          {options?.map((option,index) => (
+            <button className="basic-button w-full justify-between" key={index}>
               {option}
               <span className="-rotate-90">
                 <FiChevronDown size={18} />

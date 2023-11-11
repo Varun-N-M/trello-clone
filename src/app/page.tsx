@@ -1,6 +1,6 @@
 "use client";
 
-import { Hero, SecondaryHeader, Sidebar } from "@/components";
+import { Header, Hero, SecondaryHeader, Sidebar } from "@/components";
 import { useStateStore } from "@/zustand/StateStore";
 import { DragDropContext } from "react-beautiful-dnd";
 
@@ -83,10 +83,11 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-row flex-1 overflow-auto">
-      <Sidebar />
-      <div className="flex flex-col relative">
-        <SecondaryHeader />
+    <main className="flex flex-col flex-1 relative overflow-hidden">
+      <Header />
+      <SecondaryHeader />
+      <div className="flex flex-row">
+        <Sidebar />
         <DragDropContext onDragEnd={onDragEnd}>
           <Hero />
         </DragDropContext>

@@ -12,7 +12,7 @@ import { Dropdown } from "./Dropdown";
 
 export const Header = () => {
   return (
-    <div className="bg-[#1D2125] w-screen relative text-[#9EACBA] border border-gray-600 font-semibold  px-2 py-[6px] flex justify-between items-center">
+    <div className="bg-[#1D2125] w-screen absolute z-20 text-[#9EACBA] border border-gray-600 font-semibold  px-2 py-[6px] flex justify-between items-center">
       <div className="flex justify-center items-center">
         <button className="p-1 hover:bg-white/[15%] rounded-md">
           <CgMenuGridO size={21} />

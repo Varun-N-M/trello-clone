@@ -11,7 +11,7 @@ export const SecondaryHeader = () => {
   const [star, setStar] = useState(false);
 
   return (
-    <div className="bg-black/[25%] w-screen pl-6 relative h-fit text-white max-lg:flex-wrap inline-flex flex-row items-center px-2 py-2.5">
+    <div className="bg-black/[25%] w-screen pl-6 absolute mt-12 z-10 h-fit text-white max-lg:flex-wrap inline-flex flex-row items-center px-2 py-2.5">
       <div className="flex items-center flex-nowrap relative min-h-[32px] max-w-full gap-1">
         <button className="text-lg font-bold px-3 py-1 hover:bg-white/[15%] rounded-[4px] ">
           Trello

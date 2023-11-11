@@ -24,18 +24,30 @@ interface columnProps {
 }
 
 export const Column = ({ column, tasks, index }: columnProps) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [anchorEl0, setAnchorEl0] = useState<HTMLButtonElement | null>(null);
+  const [anchorEl1, setAnchorEl1] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl0(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl0(null);
   };
 
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl0);
   const id = open ? "simple-popover" : undefined;
+
+  const handleClick1 = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+  };
+
+  const open1 = Boolean(anchorEl1);
+  const id1 = open1 ? "simple-popover" : undefined;
 
   const { state, setState } = useStateStore();
 
@@ -120,65 +132,81 @@ export const Column = ({ column, tasks, index }: columnProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
         >
-          <div className="bg-[#101204] text-[#989ea2] h-fit w-[270px] px-3 py-2 rounded-xl">
+          <div className="bg-[#101204] text-[#989ea2] h-fit w-[270px] px-3 py-1 rounded-xl">
             <div
-              className="flex items-center gap-1 px-1 py-2 mb-1"
+              className="flex items-center gap-1 px-1 pt-1 mb-1"
               {...provided.dragHandleProps}
             >
-              {colTitleState === "button" ? (
+              <div className="w-full">
                 <button
-                  className="text-left font-bold w-full"
-                  onClick={() => setColTitleState("input")}
+                  className="text-left font-bold w-full outline-none px-2 py-1 rounded-lg hover:bg-white/25"
+                  onClick={handleClick1}
                 >
                   {column.title.substring(0, 15)}
                 </button>
-              ) : (
-                <>
-                  <Input
-                    value={localTitle}
-                    onChange={(e) => setLocalTitle(e.target.value)}
-                    style={{
-                      color: "white",
-                      backgroundColor: "#22272B",
-                      border: "none",
-                    }}
-                    autoFocus
-                    placeholder="Enter list title"
-                    onKeyDown={submit}
-                  />
-                </>
-              )}
-              <button className="ml-auto" onClick={handleClick}>
-                <SlOptions size={14} />
-              </button>
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-                className="mt-2 "
-              >
-                <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-[170px] border border-gray-800">
-                  <button
-                    className="basic-button w-full justify-between"
-                    onClick={() => setManageState("addTask")}
-                  >
-                    Add card
-                    <span className="-rotate-90"></span>
-                  </button>
-                  <button
-                    className="basic-button w-full justify-between"
-                    onClick={deleteColumn}
-                  >
-                    Delete
-                    <span className="-rotate-90"></span>
-                  </button>
-                </div>
-              </Popover>
+                <Popover
+                  id={id1}
+                  open={open1}
+                  anchorEl={anchorEl1}
+                  onClose={handleClose1}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  style={{ borderRadius: "10px" }}
+                >
+                  <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-[200px] border border-gray-800">
+                    <Input
+                      value={localTitle}
+                      onChange={(e) => setLocalTitle(e.target.value)}
+                      style={{
+                        color: "#9EACBA",
+                        backgroundColor: "transparent",
+                        border: "none",
+                      }}
+                      autoFocus
+                      placeholder="Enter list title"
+                      onKeyDown={submit}
+                    />
+                  </div>
+                </Popover>
+              </div>
+              <div>
+                <button
+                  className="ml-auto hover:bg-white/25 p-2 rounded-lg mt-2"
+                  onClick={handleClick}
+                >
+                  <SlOptions size={14} />
+                </button>
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl0}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  className="mt-2 "
+                >
+                  <div className="bg-[#1D2125] text-[#9EACBA] w-screen max-w-[170px] border border-gray-800">
+                    <button
+                      className="basic-button w-full justify-between"
+                      onClick={() => setManageState("addTask")}
+                    >
+                      Add card
+                      <span className="-rotate-90"></span>
+                    </button>
+                    <button
+                      className="basic-button w-full justify-between"
+                      onClick={deleteColumn}
+                    >
+                      Delete
+                      <span className="-rotate-90"></span>
+                    </button>
+                  </div>
+                </Popover>
+              </div>
             </div>
             <Droppable droppableId={column.id}>
               {(provided) => (
@@ -188,7 +216,12 @@ export const Column = ({ column, tasks, index }: columnProps) => {
                   {...provided.droppableProps}
                 >
                   {tasks?.map((task: any, index: any) => (
-                    <Tasks key={task.id} task={task} index={index} column={column} />
+                    <Tasks
+                      key={task.id}
+                      task={task}
+                      index={index}
+                      column={column}
+                    />
                   ))}
                   {provided.placeholder}
                 </div>

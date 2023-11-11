@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components";
 
 export const metadata: Metadata = {
   title: "Trello-clone",
@@ -14,8 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="background-gradient">
-      <body className="relative overflow-y-hidden">
-        <Header />
+      <body className="relative">
         {children}
       </body>
     </html>

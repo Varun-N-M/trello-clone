@@ -50,7 +50,7 @@ export const Hero = () => {
   }
 
   return (
-    <div className="relative w-screen h-screen pb-[170px] lg:pb-[130px] overflow-y-hidden mt-3">
+    <div className="relative w-screen h-screen max-lg:pt-[150px] lg:pt-28 pb-4">
       <div className="overflow-auto flex flex-row h-full px-4">
         <Droppable droppableId="all-cols" type="column" direction="horizontal">
           {(provided) => (
