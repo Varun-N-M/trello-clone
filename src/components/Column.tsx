@@ -126,13 +126,17 @@ export const Column = ({ column, tasks, index }: columnProps) => {
 
   return (
     <Draggable draggableId={column.id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           className="h-full ml-3 "
           ref={provided.innerRef}
           {...provided.draggableProps}
         >
-          <div className="bg-[#101204] text-[#989ea2] h-fit w-[270px] px-3 py-1 rounded-xl">
+          <div
+            className={`bg-[#101204] text-[#989ea2] h-fit w-[270px] px-3 py-1 rounded-xl ${
+              snapshot.isDragging ? "rotate-2 bg-[#101204]/80" : ""
+            }`}
+          >
             <div
               className="flex items-center gap-1 px-1 pt-1 mb-1"
               {...provided.dragHandleProps}

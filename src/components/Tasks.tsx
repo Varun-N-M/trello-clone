@@ -56,7 +56,7 @@ export const Tasks = ({ task, index, column }: TaskProps) => {
       const { [task.id]: taskToRemove, ...remainingTasks } = tasks;
 
       const updatedTaskIds = state.columns[column.id].taskIds.filter(
-        (taskId:string) => taskId !== task.id
+        (taskId: string) => taskId !== task.id
       );
 
       const newState = {
@@ -78,20 +78,25 @@ export const Tasks = ({ task, index, column }: TaskProps) => {
     <div className="">
       {manageState === "editTask" ? (
         <Draggable draggableId={task.id} index={index}>
-          {(provided) => (
+          {(provided, snapshot) => (
             <div
-              className="flex justify-between items-center bg-[#22272B] text-gray-300 rounded-lg px-2 py-2 h-10 mb-2 group"
               ref={provided.innerRef}
               {...provided.dragHandleProps}
               {...provided.draggableProps}
             >
-              {task.content.substring(0, 15) + "..."}
-              <button
-                className="hidden group-hover:flex hover:bg-gray-500/25 p-2 rounded-full"
-                onClick={() => setManageState("openEdit")}
+              <div
+                className={`flex justify-between items-center bg-[#22272B] text-gray-300 rounded-lg px-2 py-2 h-10 mb-2 group ${
+                  snapshot.isDragging ? "rotate-2 bg-[#22272B]/80" : ""
+                }`}
               >
-                <FiEdit2 size={15} />
-              </button>
+                {task.content.substring(0, 15) + "..."}
+                <button
+                  className="hidden group-hover:flex hover:bg-gray-500/25 p-2 rounded-full"
+                  onClick={() => setManageState("openEdit")}
+                >
+                  <FiEdit2 size={15} />
+                </button>
+              </div>
             </div>
           )}
         </Draggable>
