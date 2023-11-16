@@ -94,16 +94,16 @@ export const Sidebar = () => {
                 todo
                 <span className="ml-auto flex flex-row items-center gap-2">
                   <SlOptions size={15} />
-                  <button
+                  <div
                     onClick={() => setStar(!star)}
-                    className="hover:scale-125"
+                    className="hover:scale-125 cursor-pointer"
                   >
                     {star ? (
                       <AiOutlineStar size={20} />
                     ) : (
                       <AiFillStar size={20} />
                     )}
-                  </button>
+                  </div>
                 </span>
               </button>
             </div>

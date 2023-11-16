@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import Input from "@mui/joy/Input";
 import { IoCloseSharp } from "react-icons/io5";
@@ -9,6 +9,8 @@ import { nanoid } from "nanoid";
 import { useStateStore } from "@/zustand/StateStore";
 import { Column } from "./Column";
 import { Droppable } from "react-beautiful-dnd";
+import { collection, getDoc,doc } from "firebase/firestore";
+import { db } from "@/firebase";
 
 export const Hero = () => {
   const { state, setState } = useStateStore();
@@ -49,6 +51,24 @@ export const Hero = () => {
     }
   }
 
+  useEffect(() => {
+    const userCollectionRef = collection(db, "user");
+    const userId = "bXDCzt9rQ0ixwXkYyYdG";
+    const fetchDataFromFirestore = async () => {
+      // Replace "user" with your actual Firestore collection name
+      const userDocRef = doc(userCollectionRef, userId);
+      const userDocSnap = await getDoc(userDocRef);
+
+      if (userDocSnap.exists()) {
+        // If the document exists, use its data
+        const userData = userDocSnap.data();
+        setState(userData);
+      }
+    };
+
+    fetchDataFromFirestore();
+  }, []);
+
   return (
     <div className="relative w-screen h-screen max-lg:pt-[150px] lg:pt-28 pb-4">
       <div className="overflow-auto flex flex-row h-full px-4">
@@ -59,7 +79,7 @@ export const Hero = () => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              {state.columnsOrder.map((colId: string,index:any) => {
+              {state.columnsOrder?.map((colId: string,index:any) => {
                 const column = state.columns[colId];
                 const tasks = column?.taskIds?.map(
                   (taskId: string) => state.tasks[taskId]
